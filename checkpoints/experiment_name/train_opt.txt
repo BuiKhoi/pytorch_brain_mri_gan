@@ -5,7 +5,7 @@
            continue_train: False                         
                 crop_size: 256                           
                  dataroot: F:\torch_gan\pix2pix\         	[default: None]
-             dataset_mode: unaligned                     
+             dataset_mode: aligned                       
                 direction: AtoB                          
               display_env: main                          
              display_freq: 400                           
@@ -16,38 +16,36 @@
           display_winsize: 256                           
                     epoch: latest                        
               epoch_count: 1                             
-                 gan_mode: lsgan                         
+                 gan_mode: vanilla                       
                   gpu_ids: 0                             
                 init_gain: 0.02                          
                 init_type: normal                        
                  input_nc: 3                             
                   isTrain: True                          	[default: None]
-                 lambda_A: 10.0                          
-                 lambda_B: 10.0                          
-          lambda_identity: 0.5                           
+                lambda_L1: 100.0                         
                 load_iter: 0                             	[default: 0]
                 load_size: 286                           
                        lr: 0.00025                       
            lr_decay_iters: 50                            
                 lr_policy: linear                        
          max_dataset_size: inf                           
-                    model: cyclegan                      
+                    model: pix2pix                       
                  n_epochs: 300                           
            n_epochs_decay: 30                            
                n_layers_D: 3                             
                      name: experiment_name               
                       ndf: 64                            
                      netD: basic                         
-                     netG: resnet_9blocks                
+                     netG: unet_256                      
                       ngf: 64                            
-               no_dropout: True                          
+               no_dropout: False                         
                   no_flip: False                         
                   no_html: False                         
-                     norm: instance                      
+                     norm: batch                         
               num_threads: 4                             
                 output_nc: 3                             
                     phase: train                         
-                pool_size: 50                            
+                pool_size: 0                             
                preprocess: resize_and_crop               
                print_freq: 100                           
              save_by_iter: False                         
