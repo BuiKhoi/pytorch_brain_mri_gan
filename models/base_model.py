@@ -86,7 +86,8 @@ class BaseModel(ABC):
         if not self.isTrain or opt.continue_train:
             load_suffix = 'iter_%d' % opt.load_iter if opt.load_iter > 0 else opt.epoch
             self.load_networks(load_suffix)
-        self.print_networks(opt.verbose)
+        if self.opt.print_network_structure:
+            self.print_networks()
 
     def eval(self):
         """Make models eval mode during test time"""
@@ -198,12 +199,7 @@ class BaseModel(ABC):
                     self.__patch_instance_norm_state_dict(state_dict, net, key.split('.'))
                 net.load_state_dict(state_dict)
 
-    def print_networks(self, verbose):
-        """Print the total number of parameters in the network and (if verbose) network architecture
-
-        Parameters:
-            verbose (bool) -- if verbose: print the network architecture
-        """
+    def print_networks(self):
         print('---------- Networks initialized -------------')
         for name in self.model_names:
             if isinstance(name, str):
@@ -211,8 +207,7 @@ class BaseModel(ABC):
                 num_params = 0
                 for param in net.parameters():
                     num_params += param.numel()
-                if verbose:
-                    print(net)
+                print(net)
                 print('[Network %s] Total number of parameters : %.3f M' % (name, num_params / 1e6))
         print('-----------------------------------------------')
 
