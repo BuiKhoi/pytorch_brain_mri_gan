@@ -1,5 +1,5 @@
 datasets/
-*.ipynb
+# *.ipynb
 __pycache__/
 .idea/
 docs/
